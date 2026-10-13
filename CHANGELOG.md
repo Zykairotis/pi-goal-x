@@ -4,6 +4,21 @@ All notable changes to pi-goal-x are documented here.
 
 ## [Unreleased]
 
+### Added
+
+- Added an optional ICE-native entry using session-owned goal state, explicit approval, bounded continuation, V2 review, and the host verifier. Approval binds the workspace and configured command; stale, failed, interrupted, or unaccounted capped work cannot self-complete. Upstream Pi behavior remains in its separate entry.
+- Added native state, lifecycle, completion, budget, and evidence-freshness regressions, plus the explicit read-only reviewer definition and local usage guide.
+
+### Fixed
+
+- Fixed native goals never completing when the approved criteria require the configured verifier: the host verifier now runs before the independent review, which receives its receipt and must re-confirm unchanged evidence afterward. Reviewer evidence may list extra inspected files but must cover every approved path.
+- Fixed provider routes that fill every tool field inventing a one-token budget and one-run allowance: `tokenBudget` and `maxRuns` accept `null` as unset, and revising a budget-limited goal reports that the budget must be removed or raised.
+
+### Changed
+
+- Rebranded the fork package as `@zykairotis/ice-goal`, pinned direct dependency versions, and selected the native entry through the ICE manifest while retaining the upstream Pi manifest.
+- Updated reviewed fork-only overrides for minimatch, brace-expansion, js-yaml, and Undici 8.10.2 security fixes; the ICE worktree dependency versions are unchanged.
+
 ## [0.32.3] — 2026-10-02
 
 ### Fixed
